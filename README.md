@@ -79,7 +79,7 @@ Users can remove books from the database with a confirmation prompt.
 ### Edit Book
 ![Edit Book](images/edit-book.png)
 
-### Book Details
+### Delete Book
 ![Delete Book](images/delete-book.png)
 
 ---
