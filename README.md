@@ -72,9 +72,13 @@ Users can remove books from the database with a confirmation prompt.
 
 Example of the working CRUD system:
 
-![Book Management System Screenshot](screenshot.png)
+![Books List](images/Screenshot 2026-03-16 161200.png)
 
-*(Replace `screenshot.png` with the actual screenshot file inside your repository.)*
+![Create Book](images/Screenshot 2026-03-16 161153.png)
+
+![Edit Book](images/Screenshot 2026-03-16 161218.png)
+
+![Book Delete](images/Screenshot 2026-03-16 161228.png)
 
 ---
 
