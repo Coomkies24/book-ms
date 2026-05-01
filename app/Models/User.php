@@ -45,4 +45,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // A Member (User) has one Membership Card
+    public function membershipCard()
+    {
+        return $this->hasOne(MembershipCard::class);
+    }
+
+    // A Member (User) can borrow many Books (Many-to-Many pivot)
+    public function books()
+    {
+        return $this->belongsToMany(Book::class);
+    }
 }

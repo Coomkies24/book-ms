@@ -14,6 +14,19 @@ class Book extends Model
         'title',
         'author',
         'genre',
-        'published_year'
+        'published_year',
+        'category_id',
     ];
+
+    // A Book can be borrowed by many Members (Users)
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    // A Book belongs to one Category
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

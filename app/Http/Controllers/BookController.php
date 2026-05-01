@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\Gate; // <-- Added this so we can check permissions!
 
 class BookController extends Controller
 {
@@ -16,11 +17,14 @@ class BookController extends Controller
 
     public function create()
     {
+        Gate::authorize('create', Book::class); // Blocks non-admins
         return view('books.create');
     }
 
     public function store(Request $request)
     {
+        Gate::authorize('create', Book::class); // Blocks non-admins
+
         $request->validate([
             'book_code' => 'required|unique:books,book_code',
             'title' => 'required',
@@ -43,11 +47,16 @@ class BookController extends Controller
     public function edit(string $id)
     {
         $book = Book::findOrFail($id);
+        Gate::authorize('update', $book); // Blocks non-admins
+        
         return view('books.edit', compact('book'));
     }
 
     public function update(Request $request, string $id)
     {
+        $book = Book::findOrFail($id);
+        Gate::authorize('update', $book); // Blocks non-admins
+
         $request->validate([
             'book_code' => 'required|unique:books,book_code,' . $id,
             'title' => 'required',
@@ -56,7 +65,6 @@ class BookController extends Controller
             'published_year' => 'required|integer|min:1850|max:2026',
         ]);
 
-        $book = Book::findOrFail($id);
         $book->update($request->all());
 
         return redirect()->route('books.index')->with('success', 'Book updated successfully.');
@@ -65,6 +73,8 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         $book = Book::findOrFail($id);
+        Gate::authorize('delete', $book); // Blocks non-admins
+        
         $book->delete();
 
         return redirect()->route('books.index')->with('success', 'Book deleted successfully.');
