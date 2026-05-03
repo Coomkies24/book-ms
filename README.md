@@ -1,100 +1,16 @@
-# Book Management System (book-ms)
+# Vintage Book Management System
 
-## Overview
+## Description of the System
+The Vintage Book Management System is a Laravel-based web application designed to manage a library archive. It goes beyond a standard CRUD application by implementing secure user authentication, role-based access control, and robust database relationships. The system features a custom vintage-themed user interface built with Bootstrap 5 and Blade templating, providing a clean and intuitive user experience while enforcing strict back-end security.
 
-**Book Management System (book-ms)** is a simple CRUD web application built with **Laravel** and **Bootstrap**.
-The system allows users to manage a collection of books by performing the following operations:
+## List of Implemented Features
 
-* Create new book records
-* View book details
-* Update existing book information
-* Delete books from the system
+* **1. Complete CRUD Operations:** Users can seamlessly interact with the database to Create, Read, Update, and Delete book records.
+  
+* **2. Authentication:** A fully functional registration and login system that handles user sessions securely.
 
-This project demonstrates the implementation of **basic CRUD functionality**, database interaction, and simple UI styling.
+* **3. Middleware:** Internal routes and dashboards are strictly protected. Unauthenticated users are automatically redirected to the login page, preventing unauthorized access to the application's core features.
 
----
+* **4. Authorization (Gates & Policies):** Role-based access control is enforced using a custom `BookPolicy`. The system distinguishes between "Admin" users (who have full CRUD privileges) and regular "Member" users (who are restricted to read-only access). Unauthorized actions are blocked with a 403 Forbidden response.
 
-## Features
-
-* Add new books to the database
-* View a list of all books
-* View detailed information about a specific book
-* Edit book information
-* Delete books
-* Pagination support for book listings
-* Vintage-themed user interface styling
-
----
-
-## Database Table Fields
-
-The system uses a **books** table with the following fields:
-
-| Field Name     | Type      | Description                         |
-| -------------- | --------- | ----------------------------------- |
-| id             | bigint    | Primary key                         |
-| book_code      | string    | Unique code identifier for the book |
-| title          | string    | Title of the book                   |
-| author         | string    | Author of the book                  |
-| genre          | string    | Genre or category of the book       |
-| published_year | integer   | Year the book was published         |
-| created_at     | timestamp | Record creation timestamp           |
-| updated_at     | timestamp | Last update timestamp               |
-
----
-
-## CRUD Operations
-
-The system implements the following CRUD operations:
-
-### Create
-
-Users can add a new book by filling out the **Add New Book** form.
-
-### Read
-
-Users can:
-
-* View a list of all books
-* View detailed information about a specific book
-
-### Update
-
-Users can modify existing book records through the **Edit Book** page.
-
-### Delete
-
-Users can remove books from the database with a confirmation prompt.
-
----
-
-## Screenshots
-
-### Books List
-![Books List](images/books-list.png)
-
-### Create Book
-![Create Book](images/create-book.png)
-
-### Edit Book
-![Edit Book](images/edit-book.png)
-
-### Delete Book
-![Delete Book](images/delete-book.png)
-
----
-
-## Technologies Used
-
-* Laravel
-* PHP
-* MySQL
-* Bootstrap 5
-* HTML / CSS
-
----
-
-## Author
-
-Developed as part of a **CRUD application project** demonstrating database operations and Laravel framework fundamentals.
-    
+* **5. Eloquent Relationships:** The system utilizes a One-to-Many database relationship (`User hasMany Books`). When a new book is created, it is automatically linked to the `user_id` of the authenticated user who added it, enforcing proper data ownership and tracking.
